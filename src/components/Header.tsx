@@ -23,6 +23,17 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAppLoaded, setIsAppLoaded] = useState(false);
+
+  useEffect(() => {
+    // Check if it already loaded (e.g., hot reload)
+    if (document.body.classList.contains("portfolio-loaded")) {
+      setIsAppLoaded(true);
+    }
+    const handleLoaded = () => setIsAppLoaded(true);
+    window.addEventListener("portfolio-loaded", handleLoaded);
+    return () => window.removeEventListener("portfolio-loaded", handleLoaded);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,10 +82,13 @@ export default function Header() {
   return (
     <>
       {/* ✅ fixed instead of sticky — floats above hero with no background interference */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled
-          ? "bg-[#0a0a0a]/75 backdrop-blur-xl"
-          : "bg-transparent backdrop-blur-none"
-        }`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        !isAppLoaded
+          ? "-translate-y-full opacity-0 pointer-events-none"
+          : isScrolled
+            ? "translate-y-0 opacity-100 bg-[#0a0a0a]/75 backdrop-blur-xl"
+            : "translate-y-0 opacity-100 bg-transparent backdrop-blur-none"
+      }`}>
 
         {/* Scroll Progress Line */}
         <motion.div

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useScroll, useTransform, useMotionValueEvent, motion, AnimatePresence } from "framer-motion";
 
 const FRAME_COUNT = 88;
 
@@ -20,6 +20,7 @@ export default function ScrollyCanvas({
   const containerRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [fakeProgress, setFakeProgress] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -44,6 +45,23 @@ export default function ScrollyCanvas({
       loadedImages.push(img);
     }
     setImages(loadedImages);
+
+    // Artificial cinematic loading delay (2.5 seconds)
+    const duration = 2500;
+    const intervalTime = 25; // 40fps tick rate
+    const increment = 100 / (duration / intervalTime);
+
+    const timer = setInterval(() => {
+      setFakeProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          return 100;
+        }
+        return prev + increment;
+      });
+    }, intervalTime);
+
+    return () => clearInterval(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -75,6 +93,18 @@ export default function ScrollyCanvas({
     }
   };
 
+  const rawImagesProgress = (imagesLoaded / FRAME_COUNT) * 100;
+  // Progress waits for both the artificial timer AND actual network loading to complete
+  const displayProgress = Math.min(Math.round(fakeProgress), Math.round(rawImagesProgress));
+  const isLoading = imagesLoaded < FRAME_COUNT || fakeProgress < 100;
+
+  useEffect(() => {
+    if (!isLoading) {
+      document.body.classList.add("portfolio-loaded");
+      window.dispatchEvent(new Event("portfolio-loaded"));
+    }
+  }, [isLoading]);
+
   return (
     <div ref={containerRef} className="relative h-[500vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
@@ -82,13 +112,47 @@ export default function ScrollyCanvas({
           ref={canvasRef}
           className="w-full h-full object-cover"
         />
-        {imagesLoaded < FRAME_COUNT && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#121212] z-50 transition-opacity duration-500 pointer-events-none">
-            <div className="text-white text-sm font-medium opacity-50 tracking-wider">
-              LOADING ASSETS {Math.round((imagesLoaded / FRAME_COUNT) * 100)}%
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isLoading && (
+            <motion.div 
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] z-[100] pointer-events-none"
+            >
+              <div className="flex flex-col items-center">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-5xl md:text-7xl font-extrabold tracking-tighter text-white uppercase"
+                >
+                  ABDE<span className="text-cyan-400">.</span>
+                </motion.h1>
+                
+                <div className="w-full min-w-[140px] md:min-w-[180px] h-[2px] bg-white/10 my-4 rounded-full overflow-hidden relative">
+                  <div 
+                    className="absolute top-0 left-0 h-full bg-cyan-400 transition-all duration-75 ease-linear shadow-[0_0_8px_rgba(34,211,238,0.8)]"
+                    style={{ width: `${displayProgress}%` }}
+                  />
+                </div>
+
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="text-xs md:text-sm font-semibold tracking-[0.4em] text-gray-400 uppercase"
+                >
+                  PORTFOLIO
+                </motion.p>
+
+                <div className="absolute bottom-12 text-gray-500 text-xs tracking-[0.2em] font-mono">
+                  LOADING ASSETS // {displayProgress}%
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
         {children && children(scrollYProgress)}
       </div>
     </div>
