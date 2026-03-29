@@ -42,11 +42,11 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-12 text-center">Client Feedback</h2>
             <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
               <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-md">
-                <p className="text-gray-300 italic mb-6">"An absolute professional. Delivered our complex web infrastructure with flawless execution and stunning UI animations."</p>
+                <p className="text-gray-300 italic mb-6">&quot;An absolute professional. Delivered our complex web infrastructure with flawless execution and stunning UI animations.&quot;</p>
                 <h4 className="text-white font-semibold">- Agency Director</h4>
               </div>
               <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-md">
-                <p className="text-gray-300 italic mb-6">"Bridged the gap between our design prototypes and a scalable React architecture perfectly."</p>
+                <p className="text-gray-300 italic mb-6">&quot;Bridged the gap between our design prototypes and a scalable React architecture perfectly.&quot;</p>
                 <h4 className="text-white font-semibold">- Product Manager</h4>
               </div>
             </div>
@@ -58,7 +58,7 @@ export default function Home() {
         </div>
 
         <footer id="contact" className="bg-[#121212] py-24 text-center border-t border-white/10 flex flex-col items-center justify-center">
-          <h2 className="text-3xl font-bold tracking-tight mb-4">Let's Connect</h2>
+            <h2 className="text-3xl font-bold tracking-tight mb-4">Let&apos;s Connect</h2>
           <p className="text-gray-400 mb-8 max-w-md mx-auto">
             Currently available for freelance opportunities or full-time roles. Get in touch to discuss your next big idea.
           </p>
