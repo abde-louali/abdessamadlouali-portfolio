@@ -27,10 +27,10 @@ const techStack = [
 export default function TechMarquee() {
   return (
     <section className="relative z-20 bg-zinc-950 py-24 overflow-hidden border-t border-white/5">
-      <div className="container mx-auto px-6 mb-12">
-        <h2 className="text-sm uppercase tracking-widest text-center text-gray-400 font-semibold">
-          Compétences Techniques
-        </h2>
+      {/* Header */}
+      <div className="container mx-auto px-6 mb-12 text-center">
+        <p className="text-[10px] tracking-[0.25em] text-gray-500 uppercase text-center mb-2">Technologies &amp; Tools</p>
+        <h2 className="text-4xl md:text-5xl font-black text-white text-center mb-12">My Arsenal</h2>
       </div>
 
       {/* Marquee Container with fade masks */}
@@ -38,18 +38,20 @@ export default function TechMarquee() {
         
         {/* Animated Track - duplicated to achieve seamless loop */}
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
-          {/* Render the array twice for the seamless loop */}
           {[...techStack, ...techStack].map((tech, index) => {
             const Icon = tech.icon;
             return (
-              <div 
-                key={index} 
-                className="flex items-center space-x-3 mx-8 px-6 py-4 rounded-xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-sm transition-colors hover:bg-white/[0.05]"
+              <div
+                key={index}
+                className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/[0.04] border border-white/[0.12] backdrop-blur-md hover:bg-white/[0.08] transition-all duration-300 cursor-default mx-1.5"
               >
-                <Icon className={`w-8 h-8 ${tech.color}`} />
-                <span className="text-xl font-medium text-gray-200 tracking-tight">
-                  {tech.name}
-                </span>
+                <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+                  <Icon className={`w-full h-full ${tech.color}`} />
+                </div>
+                <div className="flex flex-col leading-none">
+                  <span className="text-[11px] font-semibold text-white/90">{tech.name}</span>
+                  <span className="text-[11px] font-semibold text-white/40">{tech.name}</span>
+                </div>
               </div>
             );
           })}

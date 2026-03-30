@@ -29,15 +29,15 @@ export default function ScrollyCanvas({
 
   const frameIndex = useTransform(scrollYProgress, [0, 1], [0, FRAME_COUNT - 1]);
 
+  // Preload images
   useEffect(() => {
-    // Preload images
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
     for (let i = 0; i < FRAME_COUNT; i++) {
       const img = new Image();
       const num = pad(i, 3);
-      img.src = `/sequence/frame_${num}_delay-0.066s.png`;
+      img.src = `/sequence/frame_${num}_delay-0.066s.webp`;
       img.onload = () => {
         loadedCount++;
         setImagesLoaded(loadedCount);
@@ -46,9 +46,8 @@ export default function ScrollyCanvas({
     }
     setImages(loadedImages);
 
-    // Artificial cinematic loading delay (2.5 seconds)
     const duration = 2500;
-    const intervalTime = 25; // 40fps tick rate
+    const intervalTime = 25;
     const increment = 100 / (duration / intervalTime);
 
     const timer = setInterval(() => {
@@ -62,15 +61,12 @@ export default function ScrollyCanvas({
     }, intervalTime);
 
     return () => clearInterval(timer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    // Draw initial frame if loaded
     if (images.length > 0 && images[0].complete && canvasRef.current) {
       renderFrame(0);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imagesLoaded]);
 
   useMotionValueEvent(frameIndex, "change", (latest) => {
@@ -94,7 +90,6 @@ export default function ScrollyCanvas({
   };
 
   const rawImagesProgress = (imagesLoaded / FRAME_COUNT) * 100;
-  // Progress waits for both the artificial timer AND actual network loading to complete
   const displayProgress = Math.min(Math.round(fakeProgress), Math.round(rawImagesProgress));
   const isLoading = imagesLoaded < FRAME_COUNT || fakeProgress < 100;
 
@@ -106,7 +101,7 @@ export default function ScrollyCanvas({
   }, [isLoading]);
 
   return (
-    <div ref={containerRef} className="relative h-[500vh]">
+    <div ref={containerRef} className="relative min-h-[800vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <canvas
           ref={canvasRef}
@@ -114,14 +109,14 @@ export default function ScrollyCanvas({
         />
         <AnimatePresence>
           {isLoading && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
               className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] z-[100] pointer-events-none"
             >
               <div className="flex flex-col items-center">
-                <motion.h1 
+                <motion.h1
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
@@ -129,15 +124,13 @@ export default function ScrollyCanvas({
                 >
                   ABDE<span className="text-cyan-400">.</span>
                 </motion.h1>
-                
                 <div className="w-full min-w-[140px] md:min-w-[180px] h-[2px] bg-white/10 my-4 rounded-full overflow-hidden relative">
-                  <div 
+                  <div
                     className="absolute top-0 left-0 h-full bg-cyan-400 transition-all duration-75 ease-linear shadow-[0_0_8px_rgba(34,211,238,0.8)]"
                     style={{ width: `${displayProgress}%` }}
                   />
                 </div>
-
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
@@ -145,7 +138,6 @@ export default function ScrollyCanvas({
                 >
                   PORTFOLIO
                 </motion.p>
-
                 <div className="absolute bottom-12 text-gray-500 text-xs tracking-[0.2em] font-mono">
                   LOADING ASSETS // {displayProgress}%
                 </div>

@@ -23,18 +23,6 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isAppLoaded, setIsAppLoaded] = useState(false);
-
-  useEffect(() => {
-    // Check if it already loaded (e.g., hot reload)
-    if (document.body.classList.contains("portfolio-loaded")) {
-      setIsAppLoaded(true);
-    }
-    const handleLoaded = () => setIsAppLoaded(true);
-    window.addEventListener("portfolio-loaded", handleLoaded);
-    return () => window.removeEventListener("portfolio-loaded", handleLoaded);
-  }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
@@ -61,7 +49,11 @@ export default function Header() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
+          if (entry.isIntersecting) {
+            // Skip work/services — handled by scroll position directly
+            if (entry.target.id === "work" || entry.target.id === "services") return;
+            setActiveSection(entry.target.id);
+          }
         });
       },
       { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 }
@@ -73,6 +65,34 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Separate scroll-based tracker for work vs services (canvas section is 500vh — confuses IntersectionObserver)
+  useEffect(() => {
+    const handleWorkServicesSpy = () => {
+      const servicesEl = document.getElementById("services");
+      const aboutEl = document.getElementById("about");
+      if (!servicesEl) return;
+
+      const scrollY = window.scrollY;
+      const servicesTop = servicesEl.offsetTop;
+      const aboutTop = aboutEl ? aboutEl.offsetTop : Infinity;
+
+      if (scrollY >= aboutTop - window.innerHeight * 0.5) {
+        // past services into about — let IntersectionObserver handle
+        return;
+      }
+      if (scrollY >= servicesTop - window.innerHeight * 0.5) {
+        setActiveSection("services");
+      } else {
+        // In the frames zone — no nav item should be active
+        setActiveSection("");
+      }
+    };
+
+    window.addEventListener("scroll", handleWorkServicesSpy, { passive: true });
+    handleWorkServicesSpy();
+    return () => window.removeEventListener("scroll", handleWorkServicesSpy);
+  }, []);
+
   const handleNavClick = (id: string) => {
     const section = document.getElementById(id);
     if (section) window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
@@ -82,12 +102,10 @@ export default function Header() {
   return (
     <>
       {/* ✅ fixed instead of sticky — floats above hero with no background interference */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        !isAppLoaded
-          ? "-translate-y-full opacity-0 pointer-events-none"
-          : isScrolled
-            ? "translate-y-0 opacity-100 bg-[#0a0a0a]/75 backdrop-blur-xl"
-            : "translate-y-0 opacity-100 bg-transparent backdrop-blur-none"
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        isScrolled
+          ? "bg-[#0a0a0a]/75 backdrop-blur-xl"
+          : "bg-transparent backdrop-blur-none"
       }`}>
 
         {/* Scroll Progress Line */}
