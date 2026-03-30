@@ -68,10 +68,10 @@ export default function ContactForm() {
                     className="text-center max-w-2xl mb-12"
                 >
                     <h2 className="text-4xl md:text-6xl font-light text-white mb-6 tracking-tight">
-                        Let's Work <span className="font-bold">Together</span>
+                        Let&apos;s Work <span className="font-bold">Together</span>
                     </h2>
                     <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-lg mx-auto">
-                        Currently open to full-stack roles in Morocco or remote. Whether you have an enterprise project or a creative vision to bring to life, I'd love to hear from you.
+                        Currently open to full-stack roles in Morocco or remote. Whether you have an enterprise project or a creative vision to bring to life, I&apos;d love to hear from you.
                     </p>
                 </motion.div>
 
