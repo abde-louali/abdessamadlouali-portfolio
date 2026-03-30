@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useRef, ReactNode } from 'react';
 import { useMotionValue, MotionValue } from 'framer-motion';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 type ScrollContextType = {
     scrollYProgress: MotionValue<number>;
