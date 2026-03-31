@@ -67,6 +67,7 @@ export default function ScrollyCanvas({
     if (images.length > 0 && images[0].complete && canvasRef.current) {
       renderFrame(0);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imagesLoaded]);
 
   useMotionValueEvent(frameIndex, "change", (latest) => {

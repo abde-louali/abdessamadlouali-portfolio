@@ -149,7 +149,7 @@ export default function Header() {
                 <FaRegFileAlt className="text-gray-400 text-sm" />
                 <span>Resume</span>
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 rounded-[12px] border border-white/[0.08] transition-all duration-300 backdrop-blur-md">
+              <a href="https://github.com/abde-louali" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 rounded-[12px] border border-white/[0.08] transition-all duration-300 backdrop-blur-md">
                 <FaGithub className="text-gray-300 text-sm" />
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 rounded-[12px] border border-white/[0.08] transition-all duration-300 backdrop-blur-md">
