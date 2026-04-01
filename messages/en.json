@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "services": "Services",
+    "work": "Work",
+    "about": "About",
+    "experience": "Experience",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "resume": "Resume",
+    "downloadResume": "Download Resume",
+    "mobileTitle": "Portfolio",
+    "backToPortfolio": "Back to Portfolio",
+    "viewOnGitHub": "View on GitHub",
+    "en": "EN",
+    "fr": "FR",
+    "english": "English",
+    "french": "Français"
+  },
+  "hero": {
+    "name": "Abdessamad",
+    "tagline": "Full Stack Web Developer",
+    "section2": "I build digital experiences.",
+    "section3title": "Architecting Solutions.",
+    "section3body": "Turning complex problems into elegant, high-performance interfaces. My focus is on writing clean, scalable code that elevates the user experience."
+  },
+  "loading": {
+    "label": "PORTFOLIO",
+    "assetsText": "LOADING ASSETS"
+  },
+  "services": {
+    "label": "CORE CAPABILITIES",
+    "title": "What I Do",
+    "frontend": {
+      "title": "Frontend Architecture",
+      "description": "Designing scalable, maintainable, and high-performance frontend systems for enterprise applications using React, Next.js, and TypeScript."
+    },
+    "fullstack": {
+      "title": "Full-Stack Development",
+      "description": "Building scalable and high-performance end-to-end applications with Laravel, Express.js, and Spring Boot backends, paired with modern, user-focused interfaces."
+    },
+    "performance": {
+      "title": "Performance Optimization",
+      "description": "Identifying bottlenecks and implementing strategies across the stack to ensure lightning-fast load times and smooth rendering."
+    },
+    "uiux": {
+      "title": "UI/UX Engineering",
+      "description": "Translating complex design systems into pixel-perfect, accessible, and responsive digital experiences."
+    }
+  },
+  "work": {
+    "label": "Selected Projects",
+    "title": "My Work",
+    "laundry": {
+      "category": "Full Stack",
+      "stack": "Spring Boot · React",
+      "title": "Laundry Service Platform",
+      "description": "End-to-end laundry management with order tracking, delivery logistics, and admin analytics.",
+      "viewProject": "View Project"
+    },
+    "comingSoonLabel": "More projects",
+    "comingSoonSub": "Coming soon"
+  },
+  "about": {
+    "title": "About",
+    "titleItalic": "Me",
+    "location": "ISTA · Ifrane · Morocco",
+    "p1": "I am a Full Stack Developer and Digital Craftsman with hands-on experience building scalable, high-performance web applications for real-world use cases. I bridge the gap between aesthetic design and robust engineering.",
+    "p2": "Strong expertise in React.js, Spring Boot, and Laravel, with hands-on experience designing RESTful APIs, integrating backend services, and solving complex technical challenges including OCR integration with Python.",
+    "p3": "Trained at ISTA Ifrane in Full Stack Web Development, delivering end-to-end projects with clean, maintainable code. Solid foundation in Agile/Scrum methodologies and experienced in collaborating closely with product and business stakeholders.",
+    "p4": "Currently open to junior full-stack roles with a focus on product-driven teams, long-term growth, and impactful digital experiences.",
+    "statsNumber": "3+",
+    "statsLabel": "Projects Delivered"
+  },
+  "testimonials": {
+    "title": "Client",
+    "titleBold": "Recommendations",
+    "subtitle": "What People Say About Me",
+    "t1quote": "This platform completely transformed how we run our laundry business. Before, everything was tracked manually — phone calls, paper notes, constant confusion. Now our livreurs, employees, and admin all work from the same system in real time. Orders are created instantly, statuses update automatically, and deliveries are tracked without a single call. It simplified the entire operation and saved us hours every day.",
+    "t1author": "Laundry Service Manager",
+    "t1meta": "Laundry Management Platform · Rabat, Morocco · 2026",
+    "comingSoon": "More recommendations coming soon"
+  },
+  "contact": {
+    "title": "Let's Work",
+    "titleBold": "Together",
+    "subtitle": "Currently open to full-stack roles in Morocco or remote. Whether you have an enterprise project or a creative vision to bring to life, I'd love to hear from you.",
+    "sendMessage": "SEND A MESSAGE",
+    "downloadCv": "DOWNLOAD CV",
+    "footer": "ABDESSAMAD · FULL STACK WEB DEVELOPER",
+    "labelName": "Your Name *",
+    "labelEmail": "Email *",
+    "labelPhone": "WhatsApp / Phone",
+    "labelProject": "About Your Project *",
+    "placeholderName": "John Doe",
+    "placeholderEmail": "john@company.com",
+    "placeholderPhone": "+212 6XX XXX XXX",
+    "placeholderProject": "What do you want to build?",
+    "formHint": "A short message is enough. Include your goal, timeline, or the main problem you want solved.",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "errorRequired": "Please fill in all required fields (Name, Email, Project).",
+    "successMessage": "Message sent successfully! I will get back to you soon.",
+    "errorFallback": "Failed to send message. Please try again.",
+    "somethingWrong": "Something went wrong"
+  },
+  "laundry": {
+    "backToPortfolio": "Back to Portfolio",
+    "viewOnGitHub": "View on GitHub",
+    "tag": "Full Stack Application",
+    "title": "Laundry Service Management Platform",
+    "description": "A complete end-to-end platform for managing laundry orders, delivery logistics, and real-time admin analytics.",
+    "screenshotsLabel": "SCREENSHOTS",
+    "adminView": "ADMIN VIEW",
+    "employeeView": "EMPLOYÉ VIEW",
+    "livreurView": "LIVREUR VIEW",
+    "adminAlt": "Admin Dashboard",
+    "employeeAlt": "Employee Interface",
+    "livreurAlt": "Livreur Delivery View",
+    "howItWorksTitle": "How It Works",
+    "step1role": "Livreur",
+    "step1desc": "Visits the client, registers them, creates an order in the app, and physically brings the laundry to the shop.",
+    "step2role": "Employé",
+    "step2desc": "Dashboard updates with the new order. Takes the physical items, follows the order details, cleans the clothes, and marks the order as Ready for Delivery.",
+    "step3role": "Livreur",
+    "step3desc": "Sees the updated order status, picks up the clean clothes, and delivers them back to the client.",
+    "step4role": "Admin",
+    "step4desc": "Watches the entire lifecycle through the analytics dashboard and orchestrates users assigned to each task.",
+    "techStackTitle": "Tech Stack",
+    "frontendLabel": "FRONTEND",
+    "backendLabel": "BACKEND",
+    "ctaTitle": "Interested in this project?",
+    "ctaSubtitle": "Feel free to reach out or check the source code on GitHub.",
+    "contactMe": "Contact Me"
+  }
+}

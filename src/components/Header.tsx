@@ -2,27 +2,39 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaRegFileAlt, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FaRegFileAlt, FaGithub } from "react-icons/fa";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
 
 export interface NavLink {
   id: string;
-  name: string;
+  labelKey: string;
 }
 
 const navLinks: NavLink[] = [
-  { id: "services", name: "Services" },
-  { id: "work", name: "Work" },
-  { id: "about", name: "About" },
-  { id: "experience", name: "Experience" },
-  { id: "testimonials", name: "Testimonials" },
-  { id: "contact", name: "Contact" },
+  { id: "services", labelKey: "services" },
+  { id: "work", labelKey: "work" },
+  { id: "about", labelKey: "about" },
+  { id: "testimonials", labelKey: "testimonials" },
+  { id: "contact", labelKey: "contact" },
 ];
 
 export default function Header() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [activeSection, setActiveSection] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const switchLocale = (newLocale: string) => {
+    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+    router.push(newPath);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
@@ -30,8 +42,6 @@ export default function Header() {
       const scrollY = window.scrollY;
       const progress = scrollY / (documentHeight - windowHeight);
       setScrollProgress(progress);
-      // Keep header completely transparent while the 500vh image sequence plays.
-      // Darken it only when the user scrolls down to the 'about' section.
       const aboutSection = document.getElementById("about");
       if (aboutSection) {
         setIsScrolled(scrollY > aboutSection.offsetTop - 100);
@@ -41,7 +51,7 @@ export default function Header() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial calculate on mount
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -50,7 +60,6 @@ export default function Header() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Skip work/services — handled by scroll position directly
             if (entry.target.id === "work" || entry.target.id === "services") return;
             setActiveSection(entry.target.id);
           }
@@ -65,7 +74,6 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-  // Separate scroll-based tracker for work vs services (canvas section is 500vh — confuses IntersectionObserver)
   useEffect(() => {
     const handleWorkServicesSpy = () => {
       const servicesEl = document.getElementById("services");
@@ -76,14 +84,10 @@ export default function Header() {
       const servicesTop = servicesEl.offsetTop;
       const aboutTop = aboutEl ? aboutEl.offsetTop : Infinity;
 
-      if (scrollY >= aboutTop - window.innerHeight * 0.5) {
-        // past services into about — let IntersectionObserver handle
-        return;
-      }
+      if (scrollY >= aboutTop - window.innerHeight * 0.5) return;
       if (scrollY >= servicesTop - window.innerHeight * 0.5) {
         setActiveSection("services");
       } else {
-        // In the frames zone — no nav item should be active
         setActiveSection("");
       }
     };
@@ -101,12 +105,10 @@ export default function Header() {
 
   return (
     <>
-      {/* ✅ fixed instead of sticky — floats above hero with no background interference */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        isScrolled
-          ? "bg-[#0a0a0a]/75 backdrop-blur-xl"
-          : "bg-transparent backdrop-blur-none"
-      }`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled
+        ? "bg-[#0a0a0a]/75 backdrop-blur-xl"
+        : "bg-transparent backdrop-blur-none"
+        }`}>
 
         {/* Scroll Progress Line */}
         <motion.div
@@ -118,7 +120,7 @@ export default function Header() {
         <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="relative flex items-center justify-between h-16">
 
-            <div className="md:hidden text-lg font-bold text-white">Portfolio</div>
+            <div className="md:hidden text-lg font-bold text-white">{t("mobileTitle")}</div>
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center space-x-5 lg:space-x-7 absolute left-1/2 -translate-x-1/2">
@@ -128,11 +130,10 @@ export default function Header() {
                   <button
                     key={link.id}
                     onClick={() => handleNavClick(link.id)}
-                    className={`text-[12px] tracking-wider transition-colors duration-300 ${
-                      isActive ? "text-white font-semibold" : "text-gray-400 hover:text-gray-200"
-                    }`}
+                    className={`text-[12px] tracking-wider transition-colors duration-300 ${isActive ? "text-white font-semibold" : "text-gray-400 hover:text-gray-200"
+                      }`}
                   >
-                    {link.name}
+                    {t(link.labelKey)}
                   </button>
                 );
               })}
@@ -147,14 +148,28 @@ export default function Header() {
                 className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/[0.08] px-3.5 py-2 rounded-[14px] text-xs font-medium text-gray-200 transition-all duration-300 backdrop-blur-md"
               >
                 <FaRegFileAlt className="text-gray-400 text-sm" />
-                <span>Resume</span>
+                <span>{t("resume")}</span>
               </a>
               <a href="https://github.com/abde-louali" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 rounded-[12px] border border-white/[0.08] transition-all duration-300 backdrop-blur-md">
                 <FaGithub className="text-gray-300 text-sm" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 rounded-[12px] border border-white/[0.08] transition-all duration-300 backdrop-blur-md">
-                <FaLinkedinIn className="text-gray-300 text-sm" />
-              </a>
+
+              {/* Locale Switcher — Desktop */}
+              <div className="hidden md:flex items-center bg-white/5 border border-white/[0.08] rounded-full overflow-hidden">
+                <button
+                  onClick={() => switchLocale("en")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium transition-all duration-300 ${locale === "en" ? "text-white" : "text-gray-500 hover:text-gray-300"}`}
+                >
+                  <span>🇬🇧</span> {t("en")}
+                </button>
+                <div className="w-[1px] h-4 bg-white/10" />
+                <button
+                  onClick={() => switchLocale("fr")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium transition-all duration-300 ${locale === "fr" ? "text-white" : "text-gray-500 hover:text-gray-300"}`}
+                >
+                  <span>🇫🇷</span> {t("fr")}
+                </button>
+              </div>
             </div>
 
             {/* Hamburger */}
@@ -176,15 +191,31 @@ export default function Header() {
                 const isActive = activeSection === link.id;
                 return (
                   <button key={link.id} onClick={() => handleNavClick(link.id)}
-                    className={`text-left text-lg font-medium tracking-tight transition-colors ${isActive ? "text-white" : "text-gray-500 hover:text-white"
-                      }`}>
-                    {link.name}
+                    className={`text-left text-lg font-medium tracking-tight transition-colors ${isActive ? "text-white" : "text-gray-500 hover:text-white"}`}>
+                    {t(link.labelKey)}
                   </button>
                 );
               })}
+
+              {/* Mobile Locale Switcher */}
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <button
+                  onClick={() => switchLocale("en")}
+                  className={`flex items-center justify-center gap-2 py-3 rounded-2xl border text-sm font-medium transition-all duration-300 ${locale === "en" ? "bg-white/10 border-white/20 text-white" : "bg-white/[0.03] border-white/[0.08] text-gray-500"}`}
+                >
+                  <span>🇬🇧</span> {t("english")}
+                </button>
+                <button
+                  onClick={() => switchLocale("fr")}
+                  className={`flex items-center justify-center gap-2 py-3 rounded-2xl border text-sm font-medium transition-all duration-300 ${locale === "fr" ? "bg-white/10 border-white/20 text-white" : "bg-white/[0.03] border-white/[0.08] text-gray-500"}`}
+                >
+                  <span>🇫🇷</span> {t("french")}
+                </button>
+              </div>
+
               <div className="pt-6 border-t border-white/10">
                 <a href="/resume.pdf" className="flex items-center justify-center space-x-2 bg-white text-black px-6 py-3 rounded-full text-sm font-bold w-full">
-                  <FaRegFileAlt /><span>Download Resume</span>
+                  <FaRegFileAlt /><span>{t("downloadResume")}</span>
                 </a>
               </div>
             </div>

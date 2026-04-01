@@ -1,11 +1,13 @@
-// ContactForm.tsx (updated)
+// ContactForm.tsx (updated with i18n)
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRegEnvelope, FaRegFileAlt } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 export default function ContactForm() {
+    const t = useTranslations("contact");
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [form, setForm] = useState({ name: "", email: "", phone: "", project: "" });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,7 +22,7 @@ export default function ContactForm() {
 
     const handleSubmit = async () => {
         if (!form.name || !form.email || !form.project) {
-            setStatus({ type: 'error', message: 'Please fill in all required fields (Name, Email, Project).' });
+            setStatus({ type: 'error', message: t('errorRequired') });
             return;
         }
 
@@ -36,18 +38,17 @@ export default function ContactForm() {
             const data = await res.json();
 
             if (res.ok) {
-                setStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
+                setStatus({ type: 'success', message: t('successMessage') });
                 setForm({ name: "", email: "", phone: "", project: "" });
-                // Close modal after 2 seconds
                 setTimeout(() => {
                     setIsFormOpen(false);
                     setStatus({ type: null, message: '' });
                 }, 2000);
             } else {
-                throw new Error(data.error || 'Something went wrong');
+                throw new Error(data.error || t('somethingWrong'));
             }
         } catch (error) {
-            setStatus({ type: 'error', message: error instanceof Error ? error.message : 'Failed to send message. Please try again.' });
+            setStatus({ type: 'error', message: error instanceof Error ? error.message : t('errorFallback') });
         } finally {
             setIsSubmitting(false);
         }
@@ -56,10 +57,8 @@ export default function ContactForm() {
     return (
         <>
             <footer id="contact" className="bg-[#0e0e0e] py-32 px-6 flex flex-col items-center justify-center relative overflow-hidden border-t border-white/[0.06]">
-                {/* Background glow (unchanged) */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/[0.02] to-transparent pointer-events-none" />
 
-                {/* Heading (unchanged) */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -68,21 +67,20 @@ export default function ContactForm() {
                     className="text-center max-w-2xl mb-12"
                 >
                     <h2 className="text-4xl md:text-6xl font-light text-white mb-6 tracking-tight">
-                        Let&apos;s Work <span className="font-bold">Together</span>
+                        {t("title")} <span className="font-bold">{t("titleBold")}</span>
                     </h2>
                     <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-lg mx-auto">
-                        Currently open to full-stack roles in Morocco or remote. Whether you have an enterprise project or a creative vision to bring to life, I&apos;d love to hear from you.
+                        {t("subtitle")}
                     </p>
                 </motion.div>
 
-                {/* Buttons (unchanged) */}
                 <div className="flex items-center gap-4 mb-16">
                     <button
                         onClick={() => setIsFormOpen(true)}
                         className="flex items-center gap-2 px-7 py-3.5 bg-white/[0.06] hover:bg-white/[0.10] border border-white/[0.12] rounded-full text-white text-sm font-medium transition-all duration-300"
                     >
                         <FaRegEnvelope className="text-sm" />
-                        SEND A MESSAGE
+                        {t("sendMessage")}
                         <span className="ml-1 text-gray-400">→</span>
                     </button>
 
@@ -93,13 +91,12 @@ export default function ContactForm() {
                         className="flex items-center gap-2 px-7 py-3.5 bg-white/[0.08] hover:bg-white/[0.13] border border-white/[0.12] rounded-full text-white text-sm font-bold tracking-wider transition-all duration-300"
                     >
                         <FaRegFileAlt className="text-sm" />
-                        DOWNLOAD CV
+                        {t("downloadCv")}
                     </a>
                 </div>
 
-                {/* Footer bottom (unchanged) */}
                 <p className="text-gray-600 text-xs tracking-[0.2em]">
-                    © {new Date().getFullYear()} ABDESSAMAD · FULL STACK WEB DEVELOPER
+                    © {new Date().getFullYear()} {t("footer")}
                 </p>
             </footer>
 
@@ -107,7 +104,6 @@ export default function ContactForm() {
             <AnimatePresence>
                 {isFormOpen && (
                     <>
-                        {/* Backdrop */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -117,7 +113,6 @@ export default function ContactForm() {
                             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
                         />
 
-                        {/* Form Card */}
                         <motion.div
                             initial={{ opacity: 0, x: "-50%", y: "-40%", scale: 0.95 }}
                             animate={{ opacity: 1, x: "-50%", y: "-50%", scale: 1 }}
@@ -127,49 +122,49 @@ export default function ContactForm() {
                         >
                             <div className="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">Your Name *</label>
+                                    <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">{t("labelName")}</label>
                                     <input
                                         name="name"
                                         value={form.name}
                                         onChange={handleChange}
-                                        placeholder="John Doe"
+                                        placeholder={t("placeholderName")}
                                         className="w-full bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">Email *</label>
+                                    <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">{t("labelEmail")}</label>
                                     <input
                                         name="email"
                                         value={form.email}
                                         onChange={handleChange}
-                                        placeholder="john@company.com"
+                                        placeholder={t("placeholderEmail")}
                                         className="w-full bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors"
                                     />
                                 </div>
                             </div>
 
                             <div className="mb-4">
-                                <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">WhatsApp / Phone</label>
+                                <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">{t("labelPhone")}</label>
                                 <input
                                     name="phone"
                                     value={form.phone}
                                     onChange={handleChange}
-                                    placeholder="+212 6XX XXX XXX"
+                                    placeholder={t("placeholderPhone")}
                                     className="w-full bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors"
                                 />
                             </div>
 
                             <div className="mb-4">
-                                <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">About Your Project *</label>
+                                <label className="text-[10px] tracking-[0.2em] text-gray-500 uppercase mb-2 block">{t("labelProject")}</label>
                                 <textarea
                                     name="project"
                                     value={form.project}
                                     onChange={handleChange}
-                                    placeholder="What do you want to build?"
+                                    placeholder={t("placeholderProject")}
                                     rows={4}
                                     className="w-full bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
                                 />
-                                <p className="text-gray-600 text-[11px] mt-2">A short message is enough. Include your goal, timeline, or the main problem you want solved.</p>
+                                <p className="text-gray-600 text-[11px] mt-2">{t("formHint")}</p>
                             </div>
 
                             {status.message && (
@@ -183,7 +178,7 @@ export default function ContactForm() {
                                 disabled={isSubmitting}
                                 className="w-full flex items-center justify-center gap-2 bg-white text-black font-semibold py-4 rounded-full hover:bg-gray-100 transition-all duration-300 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                {isSubmitting ? 'Sending...' : 'Send Message'}
+                                {isSubmitting ? t("submitting") : t("submit")}
                                 <IoSend />
                             </button>
                         </motion.div>

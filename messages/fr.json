@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "services": "Services",
+    "work": "Projets",
+    "about": "À propos",
+    "experience": "Expérience",
+    "testimonials": "Avis",
+    "contact": "Contact",
+    "resume": "CV",
+    "downloadResume": "Télécharger le CV",
+    "mobileTitle": "Portfolio",
+    "backToPortfolio": "Retour au Portfolio",
+    "viewOnGitHub": "Voir sur GitHub",
+    "en": "EN",
+    "fr": "FR",
+    "english": "English",
+    "french": "Français"
+  },
+  "hero": {
+    "name": "Abdessamad",
+    "tagline": "Développeur Web Full Stack",
+    "section2": "Je crée des expériences digitales.",
+    "section3title": "Architecte de Solutions.",
+    "section3body": "Transformer des problèmes complexes en interfaces élégantes et performantes. Mon objectif est d'écrire un code propre et évolutif qui améliore l'expérience utilisateur."
+  },
+  "loading": {
+    "label": "PORTFOLIO",
+    "assetsText": "CHARGEMENT"
+  },
+  "services": {
+    "label": "COMPÉTENCES CLÉS",
+    "title": "Ce que je fais",
+    "frontend": {
+      "title": "Architecture Frontend",
+      "description": "Conception de systèmes frontend évolutifs, maintenables et performants pour des applications d'entreprise avec React, Next.js et TypeScript."
+    },
+    "fullstack": {
+      "title": "Développement Full-Stack",
+      "description": "Création d'applications bout-en-bout évolutives et haute performance avec Laravel, Express.js et Spring Boot, associées à des interfaces modernes centrées utilisateur."
+    },
+    "performance": {
+      "title": "Optimisation des Performances",
+      "description": "Identification des goulots d'étranglement et mise en œuvre de stratégies pour garantir des temps de chargement ultra-rapides et un rendu fluide."
+    },
+    "uiux": {
+      "title": "Ingénierie UI/UX",
+      "description": "Traduction de systèmes de design complexes en expériences numériques pixel-perfect, accessibles et responsives."
+    }
+  },
+  "work": {
+    "label": "Projets Sélectionnés",
+    "title": "Mes Projets",
+    "laundry": {
+      "category": "Full Stack",
+      "stack": "Spring Boot · React",
+      "title": "Plateforme de Gestion de Laverie",
+      "description": "Gestion complète de laverie avec suivi des commandes, logistique de livraison et tableau de bord analytique.",
+      "viewProject": "Voir le Projet"
+    },
+    "comingSoonLabel": "Plus de projets",
+    "comingSoonSub": "Bientôt disponible"
+  },
+  "about": {
+    "title": "À propos",
+    "titleItalic": "de moi",
+    "location": "ISTA · Ifrane · Maroc",
+    "p1": "Je suis un Développeur Full Stack et Artisan Digital avec une expérience pratique dans la création d'applications web évolutives et performantes pour des cas d'usage réels. Je fais le lien entre le design esthétique et l'ingénierie robuste.",
+    "p2": "Expertise solide en React.js, Spring Boot et Laravel, avec une expérience pratique dans la conception d'API RESTful, l'intégration de services backend et la résolution de défis techniques complexes incluant l'intégration OCR avec Python.",
+    "p3": "Formé à l'ISTA Ifrane en Développement Web Full Stack, livrant des projets complets avec un code propre et maintenable. Bases solides en méthodologies Agile/Scrum et expérience de collaboration étroite avec les parties prenantes produit et business.",
+    "p4": "Actuellement ouvert à des postes junior full-stack axés sur des équipes orientées produit, une croissance à long terme et des expériences digitales impactantes.",
+    "statsNumber": "3+",
+    "statsLabel": "Projets Livrés"
+  },
+  "testimonials": {
+    "title": "Recommandations",
+    "titleBold": "Clients",
+    "subtitle": "Ce que les gens disent de moi",
+    "t1quote": "Cette plateforme a complètement transformé notre façon de gérer notre laverie. Avant, tout était suivi manuellement — appels téléphoniques, notes papier, confusion constante. Maintenant, nos livreurs, employés et l’administrateur travaillent tous depuis le même système en temps réel. Les commandes sont créées instantanément, les statuts se mettent à jour automatiquement, et les livraisons sont suivies sans un seul appel. Cela a simplifié toute l’opération et nous a fait gagner des heures chaque jour.",
+    "t1author": "Gérant de Laverie",
+    "t1meta": "Plateforme de Gestion de Laverie · Rabat, Maroc · 2026",
+    "comingSoon": "D’autres recommandations arrivent bientôt"
+  },
+  "contact": {
+    "title": "Travaillons",
+    "titleBold": "Ensemble",
+    "subtitle": "Actuellement disponible pour des postes full-stack au Maroc ou à distance. Que vous ayez un projet d'entreprise ou une vision créative à concrétiser, j'adorerais vous entendre.",
+    "sendMessage": "ENVOYER UN MESSAGE",
+    "downloadCv": "TÉLÉCHARGER LE CV",
+    "footer": "ABDESSAMAD · DÉVELOPPEUR WEB FULL STACK",
+    "labelName": "Votre Nom *",
+    "labelEmail": "Email *",
+    "labelPhone": "WhatsApp / Téléphone",
+    "labelProject": "Votre Projet *",
+    "placeholderName": "Jean Dupont",
+    "placeholderEmail": "jean@entreprise.com",
+    "placeholderPhone": "+33 6XX XXX XXX",
+    "placeholderProject": "Que souhaitez-vous créer ?",
+    "formHint": "Un court message suffit. Décrivez votre objectif, délai ou le problème principal à résoudre.",
+    "submit": "Envoyer le Message",
+    "submitting": "Envoi en cours...",
+    "errorRequired": "Veuillez remplir tous les champs obligatoires (Nom, Email, Projet).",
+    "successMessage": "Message envoyé avec succès ! Je vous répondrai dès que possible.",
+    "errorFallback": "Échec de l'envoi. Veuillez réessayer.",
+    "somethingWrong": "Une erreur s'est produite"
+  },
+  "laundry": {
+    "backToPortfolio": "Retour au Portfolio",
+    "viewOnGitHub": "Voir sur GitHub",
+    "tag": "Application Full Stack",
+    "title": "Plateforme de Gestion de Laverie",
+    "description": "Une plateforme complète pour gérer les commandes de laverie, la logistique de livraison et les analyses en temps réel.",
+    "screenshotsLabel": "CAPTURES D'ÉCRAN",
+    "adminView": "VUE ADMIN",
+    "employeeView": "VUE EMPLOYÉ",
+    "livreurView": "VUE LIVREUR",
+    "adminAlt": "Tableau de bord Admin",
+    "employeeAlt": "Interface Employé",
+    "livreurAlt": "Vue Livraison Livreur",
+    "howItWorksTitle": "Comment ça fonctionne",
+    "step1role": "Livreur",
+    "step1desc": "Visite le client, l'enregistre, crée une commande dans l'application et apporte physiquement le linge à la boutique.",
+    "step2role": "Employé",
+    "step2desc": "Le tableau de bord se met à jour avec la nouvelle commande. Récupère les articles physiques, suit les détails de la commande, nettoie les vêtements et marque la commande comme Prête à livrer.",
+    "step3role": "Livreur",
+    "step3desc": "Voit le statut mis à jour, récupère les vêtements propres et les livre au client.",
+    "step4role": "Admin",
+    "step4desc": "Surveille tout le cycle via le tableau de bord analytique et coordonne les utilisateurs affectés à chaque tâche.",
+    "techStackTitle": "Stack Technique",
+    "frontendLabel": "FRONTEND",
+    "backendLabel": "BACKEND",
+    "ctaTitle": "Intéressé par ce projet ?",
+    "ctaSubtitle": "N'hésitez pas à me contacter ou consulter le code source sur GitHub.",
+    "contactMe": "Me Contacter"
+  }
+}
