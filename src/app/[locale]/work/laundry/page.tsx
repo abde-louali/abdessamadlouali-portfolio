@@ -48,9 +48,9 @@ export default function LaundryProjectPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6">
           {[
-            { file: "admin_page.png", alt: t("adminAlt"), role: t("adminView") },
-            { file: "employee_page.png", alt: t("employeeAlt"), role: t("employeeView") },
-            { file: "livreur_page.png", alt: t("livreurAlt"), role: t("livreurView") }
+            { file: "admin_page.webp", alt: t("adminAlt"), role: t("adminView") },
+            { file: "employee_page.webp", alt: t("employeeAlt"), role: t("employeeView") },
+            { file: "livreur_page.webp", alt: t("livreurAlt"), role: t("livreurView") }
           ].map((img, idx) => (
             <div key={idx} className={`flex flex-col gap-3 ${idx === 0 ? "md:col-span-2" : ""}`}>
               <div className="text-[10px] tracking-[0.2em] text-cyan-400 font-semibold uppercase">

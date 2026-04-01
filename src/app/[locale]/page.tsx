@@ -80,7 +80,7 @@ export default function Home() {
               <Link href={`/${locale}/work/laundry`} className="group relative bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-500 hover:-translate-y-1">
                 <div className="bg-white/[0.02] border-b border-white/[0.08] overflow-hidden flex items-center justify-center">
                   <Image
-                    src="/work/laundry/admin_page.png"
+                    src="/work/laundry/admin_page.webp"
                     alt={t("work.laundry.title")}
                     width={1920}
                     height={1080}
@@ -119,7 +119,7 @@ export default function Home() {
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/[0.08]">
               <Image
-                src="/about.png"
+                src="/about.webp"
                 alt="Abdessamad Louali"
                 fill
                 className="object-cover object-top"
