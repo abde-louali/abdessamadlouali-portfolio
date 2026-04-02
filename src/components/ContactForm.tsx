@@ -85,7 +85,8 @@ export default function ContactForm() {
                     </button>
 
                     <a
-                        href="/resume.pdf"
+                        href="/CV_ABDESSAMAD_LOUALI.pdf"
+                        download="CV_ABDESSAMAD_LOUALI.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-7 py-3.5 bg-white/[0.08] hover:bg-white/[0.13] border border-white/[0.12] rounded-full text-white text-sm font-bold tracking-wider transition-all duration-300"

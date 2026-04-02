@@ -142,7 +142,8 @@ export default function Header() {
             {/* Right Buttons */}
             <div className="hidden md:flex items-center space-x-3 ml-auto">
               <a
-                href="/resume.pdf"
+                href="/CV_ABDESSAMAD_LOUALI.pdf"
+                download="CV_ABDESSAMAD_LOUALI.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/[0.08] px-3.5 py-2 rounded-[14px] text-xs font-medium text-gray-200 transition-all duration-300 backdrop-blur-md"
@@ -214,7 +215,7 @@ export default function Header() {
               </div>
 
               <div className="pt-6 border-t border-white/10">
-                <a href="/resume.pdf" className="flex items-center justify-center space-x-2 bg-white text-black px-6 py-3 rounded-full text-sm font-bold w-full">
+                <a href="/cv.pdf" download="CV.pdf" className="flex items-center justify-center space-x-2 bg-white text-black px-6 py-3 rounded-full text-sm font-bold w-full">
                   <FaRegFileAlt /><span>{t("downloadResume")}</span>
                 </a>
               </div>
